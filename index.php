@@ -113,9 +113,8 @@ $dhamDecoded = base64_decode($dhamEncoded);
 					    <input type="hidden" value="1" name="type">
                         <input type="hidden" value=<?php echo $dhamEncoded ?> name="dham">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<button type="button" class="btn btn-success" id="btn-add">Add</button>
                         <button type="button" class="btn btn-danger" id="btn-remove">Remove</button>
-
+                        <button type="button" class="btn btn-success" id="btn-add">Add</button>
                     </div>
 				</form>
 			</div>

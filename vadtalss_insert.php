@@ -34,7 +34,7 @@ foreach ($arr as $key => $value) {
         $sql = "INSERT INTO ".$key."(room_no) VALUES (" . $i . ")";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "Done-";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
