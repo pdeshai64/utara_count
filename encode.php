@@ -13,6 +13,8 @@ $arr = array(
 );
 foreach ($arr as $key => $value) {
     echo '<br/>';
+    echo $key;
+    echo '<br/>';
     echo   'https://utara.shreehariji.com/utaraCount/?dham='. base64_encode($key);
     echo '<br/>';
 }
