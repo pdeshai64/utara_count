@@ -1,30 +1,23 @@
 <?php
-/*
-$arr = array(
-    "vadtal_dham_ss" => 70,
-    "vadtal_dham_1" => 115,
-    "vadtal_dham_2" => 1006,
-    "gadhpur_dham" => 350,
-    "junagadh_dham_male" => 180,
-    "junagadh_dham_female" => 180,
-    "dholera_dham_male" => 525,
-    "dholera_dham_female" => 580,
-    "dharm_ss_male" => 140,
-    "bhakti_ss_female" => 125
-);
+$servername = "localhost";
+$username = "shreehar_mahotsavutara";
+$password = "SarDharMahotsav@2021";
+$dbname = "shreehar_mahotsavutara";
+/*$username = "root";
+$password = "root";
+$dbname = "utara_test";
 */
-
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 $arr = array(
-    "vadtal_dham_ss" => 70,
-    "vadtal_dham_1" => 115,
-    "vadtal_dham_2" => 1006,
     "gadhpur_dham" => 350,
     "junagadh_dham_male" => 180,
     "junagadh_dham_female" => 180,
-    "dholera_dham_male" => 525,
-    "dholera_dham_female" => 580,
-    "dharm_ss_male" => 140,
-    "bhakti_ss_female" => 125,
+
     "dholera_dham_sahjanand_male" => 200,
 
     "dholera_dham_shreehari_male" => 200,
@@ -63,25 +56,32 @@ $arr = array(
 
     "dholera_dham_sarjudas_female" => 200,
 
-    "dholera_dham_shreeji_female" => 200,
+    "dholera_dham_shreeji_female" => 200
 
-    "junagadh_1" => 70,
-
-    "junagadh_ss" => 70,
-
-    "gadhpur_ss" => 70
 );
 
+$sum=0;
 foreach ($arr as $key => $value) {
-    echo '<br/>';
-    echo $key;
-    echo '<br/>';
-    echo   'https://utara.shreehariji.com/utaraCount/?dham='. base64_encode($key);
-    echo '<br/>';
+    //echo $key . '-' . $value;
+
+
+        $sql = "SELECT SUM(count) as count FROM ".$key;
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+            while($row = $result->fetch_assoc()) {
+                $current_count = $row["count"];
+                $sum = $sum + $current_count;
+                echo str_replace('_',' ', strtoupper($key))." - ".$current_count. "<br>";
+            }
+        } else {
+            echo $key." - Not Found". "<br>";
+
+        }
 }
+echo "<br> <br> Total = ".$sum."<br>";
 
-//echo str_replace('_',' ',strtoupper("junagadh_purus_1"));
 
-//str_replace('_', ' ', ucwords($state));
-
+$conn->close();
 ?>
